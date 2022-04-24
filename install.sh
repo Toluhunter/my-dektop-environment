@@ -16,7 +16,7 @@ function install_dependencies(){
 
     echo "Installing fonts ..."
     sleep 0.3s
-    mkdir ~/.fonts
+    mkdir -p ~/.fonts
     cp $BASEDIR/fonts/* ~/.fonts
 }
 
@@ -37,7 +37,7 @@ function setup_configurations(){
 
     echo "setting up i3 blocks configuration"
     sleep 0.3s
-    mkdir ~/.i3
+    mkdir -p ~/.i3
     cp -r $BASEDIR/scripts ~/.i3
     cp $BASEDIR/i3blocks.conf /etc/
 
