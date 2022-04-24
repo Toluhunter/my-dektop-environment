@@ -1,12 +1,13 @@
 #! /usr/bin/bash
 
 BASEDIR=$( dirname $0 )
+
 function install_dependencies(){
     echo "Installing Dependecies ..."
     sleep 1s
 
     packages=$(tr $'\n' ' ' < $BASEDIR/packages)
-    pacman -Sy $packages
+    sudo pacman -Sy $packages
 
     if [[ $? != 0 ]]
     then
@@ -16,15 +17,15 @@ function install_dependencies(){
 
     echo "Installing fonts ..."
     sleep 0.3s
-    mkdir ~/.fonts
-    cp $BASEDIR/fonts/* ~/.fonts
+    mkdir -p "$HOME/.fonts"
+    cp "$BASEDIR/fonts/"* "$HOME/.fonts"
 }
 
 function setup_services(){
     echo "Setting up services ..."
     sleep 1s
-    rm /etc/systemd/system/display-manager.service 2> /dev/null
-    systemctl enable --now bluetooth NetworkManager lightdm
+    sudo rm /etc/systemd/system/display-manager.service 2> /dev/null
+    sudo systemctl enable --now bluetooth NetworkManager lightdm
 }
 
 function setup_configurations(){
@@ -33,24 +34,25 @@ function setup_configurations(){
 
     echo "Setting up bluetooth configuration"
     sleep 0.3s
-    sed -ri 's/(AutoEnable)=false/\1=true/' /etc/bluetooth/main.conf
+    sudo sed -ri 's/#(AutoEnable)=false/\1=true/' /etc/bluetooth/main.conf
 
     echo "setting up i3 blocks configuration"
     sleep 0.3s
-    mkdir ~/.i3
-    cp -r $BASEDIR/scripts ~/.i3
-    cp $BASEDIR/i3blocks.conf /etc/
+    mkdir -p "$HOME/.i3"
+    cp -r "$BASEDIR/scripts" "$HOME/.i3"
+    sudo cp "$BASEDIR/i3blocks.conf" "/etc/"
 
     echo "setting up i3 configuration file"
     sleep 0.3s
-    mkdir -p ~/.config/i3
-    cp $BASEDIR/config ~/.config/i3
+    mkdir -p "$HOME/.config/i3"
+    cp "$BASEDIR/config" "$HOME/.config/i3"
 }
 function main(){
-    if [[ $UID != 0 ]]
+    if [[ $UID == 0 ]]
     then
-        echo "Please run this script as root"
-        exit -1
+       echo "Warning: This will install desktop environment configuration for only root user"
+       echo "If this is not what you want please run script as normal user"
+       sleep 2s
     fi
 
     install_dependencies
