@@ -25,7 +25,7 @@ function setup_services(){
     echo "Setting up services ..."
     sleep 1s
     sudo rm /etc/systemd/system/display-manager.service 2> /dev/null
-    sudo systemctl enable --now bluetooth NetworkManager lightdm
+    sudo systemctl enable --now bluetooth NetworkManager lightdm dhcpcd wpa_supplicant
 }
 
 function setup_configurations(){
