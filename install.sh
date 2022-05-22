@@ -46,6 +46,11 @@ function setup_configurations(){
     sleep 0.3s
     mkdir -p "$HOME/.config/i3"
     cp "$BASEDIR/config" "$HOME/.config/i3"
+
+    echo "setting up touchpad"
+    sleep 0.3s
+    sudo cp "$BASEDIR/touchpad/30-touchpad.conf" "/etc/X11/xorg.conf.d/"
+
 }
 function main(){
     if [[ $UID == 0 ]]
