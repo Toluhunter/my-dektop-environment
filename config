@@ -69,10 +69,17 @@ bindsym $mod+d exec rofi -show drun -font "System San Francisco Display 10"
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
+# move between monitor
+
+bindsym $mod+Ctrl+semicolon move workspace to output right
+bindsym $mod+Ctrl+j move workspace to output left
+bindsym $mod+Ctrl+l move workspace to output down
+bindsym $mod+Ctrl+k move workspace to output up
+
 # change focus
 bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
+bindsym $mod+k focus up
+bindsym $mod+l focus down
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -83,8 +90,8 @@ bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move down
 bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
