@@ -6,8 +6,12 @@ function install_dependencies(){
     echo "Installing Dependecies ..."
     sleep 1s
 
+    git clone https://aur.archlinux.org/yay.git $BASEDIR
+    cd $BASEDIR/yay
+    makepkg -si
+
     packages=$(tr $'\n' ' ' < $BASEDIR/packages)
-    sudo pacman -Sy $packages
+    yum -Sy $packages
 
     if [[ $? != 0 ]]
     then
