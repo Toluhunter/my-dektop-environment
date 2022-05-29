@@ -11,9 +11,10 @@ function install_dependencies(){
     
     cd ./yay
     makepkg -si
+    cd -
 
     packages=$(tr $'\n' ' ' < $BASEDIR/packages)
-    yum -Sy $packages
+    yay -Sy $packages
 
     if [[ $? != 0 ]]
     then
