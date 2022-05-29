@@ -6,8 +6,10 @@ function install_dependencies(){
     echo "Installing Dependecies ..."
     sleep 1s
 
-    git clone https://aur.archlinux.org/yay.git $BASEDIR
-    cd $BASEDIR/yay
+    cd $BASEDIR
+    git clone https://aur.archlinux.org/yay.git
+    
+    cd ./yay
     makepkg -si
 
     packages=$(tr $'\n' ' ' < $BASEDIR/packages)
